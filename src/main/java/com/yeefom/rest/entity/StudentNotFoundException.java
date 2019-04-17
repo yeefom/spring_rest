@@ -1,4 +1,4 @@
-package com.yeefom.rest.server;
+package com.yeefom.rest.entity;
 
 public class StudentNotFoundException extends RuntimeException {
     public StudentNotFoundException(String message, Throwable cause) {
