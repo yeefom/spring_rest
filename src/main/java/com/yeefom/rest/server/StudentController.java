@@ -3,9 +3,12 @@ package com.yeefom.rest.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import com.yeefom.rest.entity.Student;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,13 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class StudentController {
 
-    @GetMapping("/students")
-    public List<Student> getStudents() {
-        List<Student> students = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+
+    @PostConstruct
+    public void createData() {
         students.add(new Student("Alex", "Ham"));
         students.add(new Student("Aaron", "Burr"));
+    }
 
+    @GetMapping("/students")
+    public List<Student> getStudents() {
         return students;
+    }
+
+    @GetMapping("/student/{studentId}")
+    public Student getStudent(@PathVariable int studentId) {
+        return students.get(studentId);
     }
 
 }
